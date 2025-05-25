@@ -1,0 +1,80 @@
+.product-list-page h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #333;
+    font-size: 2rem;
+}
+
+.search-form {
+    display: flex;
+    margin-bottom: 24px; /* Más espacio debajo del buscador */
+    gap: 10px; /* Espacio entre input y botón */
+}
+
+.search-input {
+    flex-grow: 1; /* Hace que el input ocupe el espacio disponible */
+    padding: 10px 15px; /* Un poco más de padding */
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.product-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px; /* Espacio entre las tarjetas */
+}
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.pagination-controls button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #e0e0e0;
+}
+
+.pagination-controls button:disabled {
+    background-color: #f9f9f9;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.pagination-controls button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    font-weight: bold;
+}
+.pagination-controls .ellipsis {
+    padding: 8px 4px;
+    color: #555;
+}

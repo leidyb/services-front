@@ -1,0 +1,141 @@
+/* Ruta: src/pages/UserManagementPage.css o donde hayas importado los estilos */
+.user-management-page {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.user-management-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.user-management-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.user-management-page th,
+.user-management-page td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.user-management-page th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #555;
+}
+
+.user-management-page tr:nth-child(even) {
+    background-color: #5d5e5d;
+}
+
+.user-management-page tr:hover {
+    background-color: #f1f1f1;
+}
+
+.edit-roles-button {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.edit-roles-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-content .form-group { /* Reutilizamos la clase si existe o la definimos */
+    margin-bottom: 15px;
+}
+.modal-content .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.modal-content .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-button.save {
+    background-color: #28a745;
+    color: white;
+}
+.modal-button.save:hover {
+    background-color: #218838;
+}
+
+.modal-button.cancel {
+    background-color: #6c757d;
+    color: white;
+}
+.modal-button.cancel:hover {
+    background-color: #5a6268;
+}
+
+.modal-error {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+.modal-success {
+    color: green;
+    margin-top: 10px;
+    font-size: 0.9em;
+}

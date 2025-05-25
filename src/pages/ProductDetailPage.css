@@ -1,0 +1,236 @@
+/* Ruta: src/pages/ProductDetailPage.css */
+.product-detail-page {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-image-container {
+    width: 100%;
+    max-height: 400px;
+    /* Ajusta según necesidad */
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    text-align: center;
+    /* Centra la imagen si es más pequeña que el contenedor */
+}
+
+.product-detail-image {
+    max-width: 100%;
+    max-height: 400px;
+    /* Para que no se desborde */
+    height: auto;
+    /* Mantiene la proporción */
+    object-fit: contain;
+    /* Para ver toda la imagen, o 'cover' si prefieres llenar */
+    border-radius: 6px;
+}
+
+.product-detail-content h1 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product-detail-page p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.product-detail-page strong {
+    color: #333;
+}
+
+.product-detail-status .status-badge {
+    font-size: 0.9rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    margin-left: 8px;
+}
+
+/* Reutiliza los estilos de status-activo, etc., de ProductCard.css o duplícalos aquí */
+.status-activo {
+    background-color: #28a745;
+}
+
+.status-inactivo {
+    background-color: #6c757d;
+}
+
+.status-pendiente {
+    background-color: #ffc107;
+    color: #333 !important;
+}
+
+/* Ajuste para contraste */
+.status-vendido {
+    background-color: #17a2b8;
+}
+
+.status-borrador {
+    background-color: #fd7e14;
+}
+
+
+.product-detail-category {
+    font-style: italic;
+    color: #007bff;
+}
+
+.product-detail-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #28a745;
+    margin: 15px 0;
+}
+
+/* Añadir a ProductDetailPage.css o tu CSS principal */
+.seller-info {
+    /* Puedes añadir estilos generales para este div si quieres */
+    margin-bottom: 15px;
+    /* Espacio debajo de la info del vendedor */
+    display: flex;
+    /* Para alinear "Ofertado por:", nombre, y estrellas en una línea */
+    align-items: center;
+    /* Alinear verticalmente */
+    gap: 8px;
+    /* Espacio entre los elementos */
+    justify-content: center;
+}
+
+.seller-info strong {
+    color: #333;
+    /* Asegurar que "Ofertado por:" también tenga un color visible */
+}
+
+.seller-username-display {
+    color: #007bff;
+    /* Un color de enlace, por ejemplo, o #333 para negro */
+    font-weight: 500;
+    /* Un poco más de énfasis */
+    /* margin-left: 5px; Ya no es necesario si usamos gap en .seller-info */
+}
+
+.product-detail-description-container h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #444;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.product-detail-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 15px;
+    /* Espacio entre botones */
+    flex-wrap: wrap;
+    /* Para que los botones se ajusten en pantallas pequeñas */
+}
+
+.action-button {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    /* Ya deberías tenerlo en ProductCard.css, puedes reusarlo o ajustarlo */
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.delete-button:disabled {
+    background-color: #f8d7da;
+    cursor: not-allowed;
+}
+
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #545b62;
+}
+
+.page-loading,
+.page-error,
+.page-info {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 40px 20px;
+    color: #555;
+}
+
+/* Añadir a ProductDetailPage.css o un archivo global */
+.ratings-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.ratings-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.rating-item-container {
+    position: relative;
+    /* Para posicionar el botón de borrar */
+}
+
+.delete-rating-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.delete-rating-button:hover {
+    background-color: #d9363e;
+}

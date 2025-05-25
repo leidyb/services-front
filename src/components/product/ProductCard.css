@@ -1,0 +1,145 @@
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px Px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-header {
+    margin-bottom: 12px;
+}
+
+.product-name {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0 0 4px 0;
+}
+
+.product-category {
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #007bff; /* Un azul agradable */
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    color: #666;
+    flex-grow: 1; /* Esto hace que la descripción ocupe el espacio disponible y empuje el pie de página hacia abajo */
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.product-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 12px;
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #28a745; /* Un verde para el precio */
+}
+
+.product-stock {
+    font-size: 0.85rem;
+    color: #888;
+}
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+.delete-button {
+    background-color: #dc3545; /* Rojo peligro */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s;
+}
+.delete-button:hover {
+    background-color: #c82333;
+}
+/* Añadir/Modificar en src/components/product/ProductCard.css */
+
+/* ... (estilos existentes .product-card, .product-name, etc.) ... */
+
+.product-card-image-container {
+    width: 100%;
+    height: 180px; /* Altura fija para la imagen, ajusta según necesites */
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 12px;
+    border-radius: 8px 8px 0 0; /* Redondear esquinas superiores si la imagen es lo primero */
+}
+
+.product-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+}
+
+.product-card-content { /* Nuevo contenedor para el texto */
+    padding: 0 16px 16px 16px; /* Ajusta si el padding general de product-card cambia */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Para que el footer se alinee abajo */
+}
+
+.product-card .product-card-header {
+    display: flex; /* Para alinear nombre y estado */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px; /* Ajustar espacio */
+}
+
+.product-status {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.status-activo { background-color: #28a745; } /* Verde */
+.status-inactivo { background-color: #6c757d; } /* Gris */
+.status-pendiente { background-color: #ffc107; color: #333 } /* Amarillo */
+.status-vendido { background-color: #17a2b8; } /* Cian */
+.status-borrador { background-color: #fd7e14; } /* Naranja */
+
+
+.product-category {
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #007bff;
+    padding: 2px 8px;
+    border-radius: 12px; /* Ajustado para que se vea más como píldora */
+    display: inline-block; /* Para que no ocupe todo el ancho */
+    margin-bottom: 8px; /* Espacio debajo de la categoría */
+}
+
+.product-card-footer {
+    /* ... (tus estilos existentes para el footer) ... */
+    margin-top: auto; /* Empuja el footer hacia abajo si .product-card-content tiene flex-grow:1 */
+}
+
+.product-card-actions { /* Contenedor para el botón de eliminar si lo quieres separado */
+    padding: 0 16px 16px 16px; /* Si el botón va después del contenido */
+}

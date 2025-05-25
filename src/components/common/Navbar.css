@@ -1,0 +1,58 @@
+/* Ruta: src/components/common/Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 0 20px;
+    color: white;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+.navbar-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.navbar-links li a {
+    display: block;
+    padding: 20px 15px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+.navbar-links li a:hover {
+    background-color: #555;
+}
+/* Añadir al final de src/components/common/Navbar.css */
+.navbar-auth-links {
+    /* Esto es para empujar los links de auth a la derecha si el .navbar usa flex y justify-content: space-between */
+    /* O simplemente dejarlos como parte de la lista principal si prefieres */
+}
+
+.navbar-username {
+    padding: 20px 15px;
+    color: #f0f0f0; /* Un color un poco más suave */
+    cursor: default; /* Para que no parezca clickeable */
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Ajustar padding para que coincida con los links */
+    margin: 10px 15px; /* Ajustar margen para que se alinee con los links */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: inherit; /* Heredar tamaño de fuente de los links */
+    transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}

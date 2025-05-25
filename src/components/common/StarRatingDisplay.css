@@ -1,0 +1,25 @@
+/* Ruta: src/components/common/StarRatingDisplay.css */
+.star-rating-display {
+    display: inline-flex; /* Para que el texto y las estrellas estén en línea */
+    align-items: center;
+    color: #ffc107; /* Amarillo estrella por defecto */
+}
+
+.star-rating-display .star {
+    margin-right: 1px;
+    line-height: 1; /* Asegurar que no haya espacio extra vertical */
+}
+
+.star-rating-display .star.empty {
+    color: #e0e0e0; /* Gris para estrellas vacías */
+}
+
+/* Para una media estrella más visual, necesitarías un ícono SVG o dos superpuestos */
+/* Esta versión simple solo muestra una estrella llena para la media */
+
+.star-rating-text {
+    margin-left: 0.5em;
+    font-size: 0.8em; /* Más pequeño que las estrellas */
+    color: #555;
+    vertical-align: middle; /* Alinear con las estrellas */
+}

@@ -1,0 +1,71 @@
+/* Ruta: src/components/common/ConfirmModal.css */
+.modal-overlay-confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Un poco más oscuro que el otro modal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050; /* Asegurar que esté por encima de otros elementos si es necesario */
+}
+
+.modal-content-confirm {
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    width: 90%;
+    max-width: 450px; /* Un poco más pequeño para confirmaciones */
+    text-align: center;
+}
+
+.modal-content-confirm h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.modal-content-confirm p {
+    margin-bottom: 25px;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.modal-actions-confirm {
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    gap: 15px;
+}
+
+.modal-button-confirm {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.modal-button-confirm.confirm {
+    background-color: #dc3545; /* Rojo para confirmaciones peligrosas como eliminar */
+    color: white;
+}
+.modal-button-confirm.confirm:hover {
+    background-color: #c82333;
+    transform: scale(1.02);
+}
+
+.modal-button-confirm.cancel {
+    background-color: #6c757d;
+    color: white;
+}
+.modal-button-confirm.cancel:hover {
+    background-color: #5a6268;
+    transform: scale(1.02);
+}

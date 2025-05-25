@@ -1,0 +1,60 @@
+/* Ruta: src/components/product/ProductForm.css */
+.product-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group input[type="email"], /* Añade otros tipos de input si los usas */
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    font-size: 1rem; 
+    font-family: inherit; 
+    height: 40px; /* Altura unificada */
+    line-height: normal; /* o 1.4, 1.5 para centrar mejor el texto si es necesario */
+}
+.form-group textarea { /* Textarea usualmente es más alto */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: inherit;
+    min-height: 80px; /* Altura mínima para textarea */
+    line-height: 1.4; /* Ajustar para textarea */
+    resize: vertical;
+}
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.submit-button:hover {
+    background-color: #218838;
+}

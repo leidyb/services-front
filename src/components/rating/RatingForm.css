@@ -1,0 +1,79 @@
+/* Ruta: src/components/rating/RatingForm.css */
+.rating-form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.rating-form h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.rating-form .form-group {
+    margin-bottom: 15px;
+}
+
+.rating-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.rating-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    font-family: inherit;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem; /* Tamaño de las estrellas */
+    margin-bottom: 10px;
+}
+
+.star-rating .star {
+    cursor: pointer;
+    color: #ccc; /* Color de estrella vacía */
+    margin-right: 2px;
+    transition: color 0.2s;
+}
+
+.star-rating .star.marked {
+    color: #ffc107; /* Color de estrella llena (amarillo) */
+}
+
+.rating-form .submit-button {
+    /* Puedes heredar estilos del .submit-button de ProductForm.css 
+       o definirlos aquí si son diferentes */
+    width: auto; /* Que no ocupe todo el ancho necesariamente */
+    padding: 10px 20px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.rating-form .submit-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.rating-form .submit-button:disabled {
+    background-color: #a0cfff;
+    cursor: not-allowed;
+}
