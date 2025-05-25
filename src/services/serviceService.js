@@ -1,7 +1,9 @@
 // Ruta: src/services/serviceService.js
 
 // Asegúrate de que la URL base sea la correcta para tu backend
-const API_BASE_URL = 'http://localhost:8080/api/v1'; 
+const RENDER_BACKEND_URL = import.meta.env.VITE_API_BASE_URL; // ej: https://tu-backend.onrender.com
+const API_BASE_URL = RENDER_BACKEND_URL || 'http://localhost:8080/api/v1'; 
+ 
 
 // Helper para obtener el token JWT de localStorage
 // Podrías mover esta función y buildAuthHeaders a un archivo utils/apiHelper.js si se repite mucho

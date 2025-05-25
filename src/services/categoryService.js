@@ -1,22 +1,27 @@
 // Ruta: src/services/categoryService.js
 
-// Asumimos que tienes una forma de obtener el token.
-// Podrías importar una función de authService.js o leer directamente de localStorage.
-// Por simplicidad, leeremos directamente de localStorage aquí.
-// import { getAuthToken } from './authService'; // Si tuvieras getAuthToken en authService.js
+// Lee la variable de entorno VITE_API_BASE_URL que configurarás en Render.
+// Si no está definida (ej. en desarrollo local), usa http://localhost:8080/api/v1 como fallback.
+const BACKEND_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
 
-const API_CATEGORIES_URL = 'http://localhost:8080/api/v1/categories';
+const API_CATEGORIES_URL = `${BACKEND_API_BASE_URL}/categories`; // Construye la URL completa para categorías
 
-// Función para construir headers, incluyendo el de autorización si hay token
-// Es buena idea centralizar esta lógica si la usas en múltiples servicios.
-const buildCategoryAuthHeaders = (includeContentType = true) => {
+// Helper para obtener el token JWT de localStorage
+const getAuthToken = () => {
+    return localStorage.getItem('authToken');
+};
+
+// Helper para construir los headers de autenticación
+const buildAuthHeaders = (isFormData = false) => {
     const headers = {};
-    if (includeContentType) {
-        headers['Content-Type'] = 'application/json';
-    }
-    const token = localStorage.getItem('authToken'); // Leer directamente el token
+    const token = getAuthToken();
+
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    if (!isFormData) {
+        headers['Content-Type'] = 'application/json';
     }
     return headers;
 };
@@ -30,11 +35,9 @@ export const getAllCategories = async (tipo) => {
     try {
         let url = API_CATEGORIES_URL;
         if (tipo) {
-            // Asegúrate de que el backend espera el valor del enum tal cual (PRODUCTO, SERVICIO)
             url += `?tipo=${tipo}`;
         }
-        // El GET para categorías lo definimos como público en el backend
-        const response = await fetch(url);
+        const response = await fetch(url); // Endpoint público
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} al obtener categorías`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener categorías`);
@@ -53,8 +56,7 @@ export const getAllCategories = async (tipo) => {
  */
 export const getCategoryById = async (id) => {
     try {
-        // Este endpoint también es público según la configuración del backend
-        const response = await fetch(`${API_CATEGORIES_URL}/${id}`);
+        const response = await fetch(`${API_CATEGORIES_URL}/${id}`); // Endpoint público
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} al obtener la categoría`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener la categoría`);
@@ -75,12 +77,14 @@ export const createCategory = async (categoryData) => {
     try {
         const response = await fetch(API_CATEGORIES_URL, {
             method: 'POST',
-            headers: buildCategoryAuthHeaders(), // Necesita token
+            headers: buildAuthHeaders(), // Necesita token
             body: JSON.stringify(categoryData)
         });
         if (!response.ok) {
             const errorBody = await response.json().catch(() => ({ message: `Error HTTP ${response.status} creando categoría` }));
-            throw new Error(errorBody.message || errorBody.error || `Error HTTP: ${response.status}`);
+            const error = new Error(errorBody.message || errorBody.error || JSON.stringify(errorBody.errors) || `Error HTTP: ${response.status}`);
+            error.status = response.status;
+            throw error;
         }
         return await response.json();
     } catch (error) {
@@ -92,19 +96,21 @@ export const createCategory = async (categoryData) => {
 /**
  * Actualiza una categoría existente (requiere rol ADMIN).
  * @param {number} id - El ID de la categoría a actualizar.
- * @param {object} categoryData - { nombre, tipo } (y cualquier otro campo actualizable)
+ * @param {object} categoryData - { nombre, tipo }
  * @returns {Promise<object>} La categoría actualizada.
  */
 export const updateCategory = async (id, categoryData) => {
     try {
         const response = await fetch(`${API_CATEGORIES_URL}/${id}`, {
             method: 'PUT',
-            headers: buildCategoryAuthHeaders(), // Necesita token
+            headers: buildAuthHeaders(), // Necesita token
             body: JSON.stringify(categoryData)
         });
         if (!response.ok) {
             const errorBody = await response.json().catch(() => ({ message: `Error HTTP ${response.status} actualizando categoría` }));
-            throw new Error(errorBody.message || errorBody.error || `Error HTTP: ${response.status}`);
+            const error = new Error(errorBody.message || errorBody.error || JSON.stringify(errorBody.errors) || `Error HTTP: ${response.status}`);
+            error.status = response.status;
+            throw error;
         }
         return await response.json();
     } catch (error) {
@@ -120,22 +126,21 @@ export const updateCategory = async (id, categoryData) => {
  */
 export const deleteCategory = async (id) => {
     try {
+        const headers = buildAuthHeaders(true); 
+        delete headers['Content-Type']; // Para DELETE sin cuerpo
+
         const response = await fetch(`${API_CATEGORIES_URL}/${id}`, {
             method: 'DELETE',
-            headers: buildCategoryAuthHeaders(false) // No necesita Content-Type para DELETE sin body, pero sí Auth
+            headers: headers
         });
-        if (!response.ok) { // Un DELETE exitoso podría devolver 204 No Content, que es 'ok'
-            // Si hay un error, intentar leer el cuerpo, que podría ser texto o JSON
+        if (!response.ok) { 
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} eliminando categoría`);
             let parsedError = { message: errorText };
-            try {
-                parsedError = JSON.parse(errorText);
-            } catch(e) {
-                // No era JSON, nos quedamos con el texto
-            }
-            throw new Error(parsedError.message || parsedError.error || errorText || `Error HTTP: ${response.status}`);
+            try { parsedError = JSON.parse(errorText); } catch(e) { /* No era JSON */ }
+            const error = new Error(parsedError.message || parsedError.error || errorText || `Error HTTP: ${response.status}`);
+            error.status = response.status;
+            throw error;
         }
-        // No se espera cuerpo JSON en un DELETE exitoso (204)
     } catch (error) {
         console.error(`Error en categoryService.deleteCategory (id: ${id}):`, error);
         throw error;

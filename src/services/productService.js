@@ -1,6 +1,8 @@
 // Ruta: src/services/productService.js
 
-const API_BASE_URL = 'http://localhost:8080/api/v1';
+const RENDER_BACKEND_URL = import.meta.env.VITE_API_BASE_URL; // ej: https://tu-backend.onrender.com
+const API_BASE_URL = RENDER_BACKEND_URL || 'http://localhost:8080/api/v1'; 
+
 
 const getAuthToken = () => {
     return localStorage.getItem('authToken');
