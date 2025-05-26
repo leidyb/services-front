@@ -149,7 +149,7 @@ const ProductDetailPage = () => {
 
 
     const formattedPrice = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(product.price);
-    const imageUrl = product.imagenes ? `http://localhost:8080${product.imagenes}` : placeholderImage;
+    const imageUrl = product.imagenes ? product.imagenes : placeholderImage; 
 
     return (
         <div className="product-detail-page">

@@ -25,9 +25,7 @@ const ServiceCard = ({ service, onDelete, isDeleting = false }) => {
         return estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
     };
 
-    const imageUrl = service.imagenes 
-                   ? (service.imagenes.startsWith('http') ? service.imagenes : `http://localhost:8080${service.imagenes}`)
-                   : placeholderServiceImage;
+    const imageUrl = service.imagenes ? service.imagenes : placeholderImage; 
 
     return (
         <Link to={`/servicio/${service.id}`} className="product-card-link"> 

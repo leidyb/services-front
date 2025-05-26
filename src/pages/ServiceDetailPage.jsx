@@ -107,7 +107,7 @@ const ServiceDetailPage = () => {
     const formattedPrice = service.estimatedPrice !== null && service.estimatedPrice !== undefined 
         ? new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(service.estimatedPrice)
         : 'A convenir';
-    const imageUrl = service.imagenes ? (service.imagenes.startsWith('http') ? service.imagenes : `http://localhost:8080${service.imagenes}`) : placeholderServiceImage;
+    const imageUrl = service.imagenes ? service.imagenes : placeholderImage; 
 
     return (
         <div className="product-detail-page">

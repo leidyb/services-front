@@ -26,9 +26,7 @@ const ProductCard = ({ product, onDelete, isDeleting = false }) => {
 
 
 
-    const imageUrl = product.imagenes 
-                   ? `http://localhost:8080${product.imagenes}` 
-                   : placeholderImage;
+    const imageUrl = product.imagenes ? product.imagenes : placeholderImage; 
 
     return (
         <Link to={`/producto/${product.id}`} className="product-card-link">
