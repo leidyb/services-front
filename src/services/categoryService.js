@@ -2,7 +2,7 @@
 
 
 
-const BACKEND_API_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
+const BACKEND_API_BASE_URL = 'https://services-back.onrender.com/api/v1';
 
 const API_CATEGORIES_URL = `${BACKEND_API_BASE_URL}/categories`;
 
