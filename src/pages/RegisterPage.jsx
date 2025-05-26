@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
 import { toast } from 'react-toastify';
-import '../components/product/ProductForm.css'; // Reusando estilos
+import '../components/product/ProductForm.css';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -11,8 +11,8 @@ const RegisterPage = () => {
         correo: '',
         username: '',
         password: '',
-        telefono: '', // Nuevo
-        ubicacion: ''  // Nuevo
+        telefono: '',
+        ubicacion: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
@@ -29,11 +29,11 @@ const RegisterPage = () => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            // Enviamos todos los datos del formulario
+
             const responseData = await register(formData); 
             toast.success(responseData.message || "¡Usuario registrado exitosamente! Ahora puedes iniciar sesión.");
 
-            // Limpiar formulario
+
             setFormData({
                 nombre: '', apellido: '', correo: '',
                 username: '', password: '', telefono: '', ubicacion: ''

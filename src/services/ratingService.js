@@ -1,20 +1,20 @@
-// Ruta: src/services/ratingService.js
 
-// Lee la variable de entorno VITE_API_BASE_URL_ROOT que configurarás en Render
-// o usa http://localhost:8080 como fallback para desarrollo local.
-// Esta debe apuntar a la raíz de tu backend, ej: http://localhost:8080 o https://tu-api.onrender.com
+
+
+
+
 const BACKEND_API_ROOT_URL = process.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080';
 
-// Construye la URL completa para los endpoints de calificaciones
+
 const API_RATINGS_URL = `${BACKEND_API_ROOT_URL}/api/v1/ratings`; 
 
-// Helper para obtener el token JWT de localStorage
+
 const getAuthToken = () => {
     return localStorage.getItem('authToken');
 };
 
-// Helper para construir los headers de autenticación
-// isFormData = false para JSON, true para FormData (no usado aquí por ahora para ratings)
+
+
 const buildAuthHeaders = (isFormData = false) => {
     const headers = {};
     const token = getAuthToken();
@@ -36,9 +36,9 @@ const buildAuthHeaders = (isFormData = false) => {
  */
 export const createRating = async (ratingData) => {
     try {
-        const response = await fetch(API_RATINGS_URL, { // Usa la URL base de ratings
+        const response = await fetch(API_RATINGS_URL, {
             method: 'POST',
-            headers: buildAuthHeaders(), // Necesita token y Content-Type: application/json
+            headers: buildAuthHeaders(),
             body: JSON.stringify(ratingData)
         });
         if (!response.ok) {
@@ -65,9 +65,9 @@ export const getRatingsForProduct = async (productId, page = 0, size = 5) => {
     try {
         const params = new URLSearchParams({ page: page.toString(), size: size.toString() });
         const url = `${API_RATINGS_URL}/product/${productId}?${params.toString()}`;
-        // console.log("URL para getRatingsForProduct:", url); // Descomentar para depurar
 
-        const response = await fetch(url); // Este endpoint es público
+
+        const response = await fetch(url);
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status}`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener calificaciones del producto`);
@@ -90,9 +90,9 @@ export const getRatingsForService = async (serviceId, page = 0, size = 5) => {
     try {
         const params = new URLSearchParams({ page: page.toString(), size: size.toString() });
         const url = `${API_RATINGS_URL}/service/${serviceId}?${params.toString()}`;
-        // console.log("URL para getRatingsForService:", url); // Descomentar para depurar
 
-        const response = await fetch(url); // Este endpoint es público
+
+        const response = await fetch(url);
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status}`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener calificaciones del servicio`);
@@ -111,8 +111,8 @@ export const getRatingsForService = async (serviceId, page = 0, size = 5) => {
  */
 export const deleteRating = async (ratingId) => {
     try {
-        const headers = buildAuthHeaders(true); // Solo Auth header
-        delete headers['Content-Type']; // DELETE no necesita Content-Type si no hay body
+        const headers = buildAuthHeaders(true);
+        delete headers['Content-Type'];
 
         const response = await fetch(`${API_RATINGS_URL}/${ratingId}`, {
             method: 'DELETE',

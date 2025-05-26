@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProductCard.css';
-import placeholderImage from '../../assets/images/placeholder-product.png'; // <-- 1. IMPORTA TU IMAGEN PLACEHOLDER
+import placeholderImage from '../../assets/images/placeholder-product.png';
 
 const ProductCard = ({ product, onDelete, isDeleting = false }) => {
     const formattedPrice = new Intl.NumberFormat('es-CO', {
@@ -23,12 +23,12 @@ const ProductCard = ({ product, onDelete, isDeleting = false }) => {
         return estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
     };
 
-    // 2. LÓGICA PARA DETERMINAR LA URL DE LA IMAGEN
-    // Tu backend devuelve la ruta completa incluyendo /uploads, 
-    // así que el frontend la usa si existe, o usa el placeholder.
+
+
+
     const imageUrl = product.imagenes 
                    ? `http://localhost:8080${product.imagenes}` 
-                   : placeholderImage; // Usa el placeholder importado si no hay imagen
+                   : placeholderImage;
 
     return (
         <Link to={`/producto/${product.id}`} className="product-card-link">

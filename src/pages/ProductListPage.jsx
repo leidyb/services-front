@@ -1,22 +1,22 @@
-// Ruta: src/pages/ProductListPage.jsx
-import React, { useState, useEffect, useCallback } from 'react'; // useCallback añadido
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { getAllProducts, deleteProduct } from '../services/productService';
 import ProductCard from '../components/product/ProductCard';
 import ConfirmModal from '../components/common/ConfirmModal';
 import { toast } from 'react-toastify';
-import './ProductListPage.css'; // Asegúrate que este CSS existe
+import './ProductListPage.css';
 
-// Componente simple para los botones de paginación
+
 const PaginationControls = ({ currentPage, totalPages, onPageChange }) => {
     const pageNumbers = [];
-    // Lógica simple para mostrar algunos números de página y puntos suspensivos
-    // Para una lógica más avanzada, se podría usar una librería de paginación
-    if (totalPages <= 7) { // Mostrar todos si son pocos
+
+
+    if (totalPages <= 7) {
         for (let i = 0; i < totalPages; i++) {
             pageNumbers.push(i);
         }
     } else {
-        pageNumbers.push(0); // Primera página
+        pageNumbers.push(0);
         if (currentPage > 2) pageNumbers.push('...');
 
         let startPage = Math.max(1, currentPage - 1);
@@ -31,7 +31,7 @@ const PaginationControls = ({ currentPage, totalPages, onPageChange }) => {
         }
 
         if (currentPage < totalPages - 3) pageNumbers.push('...');
-        pageNumbers.push(totalPages - 1); // Última página
+        pageNumbers.push(totalPages - 1);
     }
 
 
@@ -67,26 +67,26 @@ const ProductListPage = () => {
     const [errorPage, setErrorPage] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
-    // --- ESTADOS PARA PAGINACIÓN ---
-    const [currentPage, setCurrentPage] = useState(0); // Página actual (0-indexed)
-    const [totalPages, setTotalPages] = useState(0);   // Total de páginas
-    const [totalElements, setTotalElements] = useState(0); // Total de productos
-    const PAGE_SIZE = 9; // Productos por página (puedes ajustarlo)
 
-    // Usamos useCallback para memorizar fetchProductsData y evitar re-ejecuciones innecesarias del useEffect
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+    const [totalElements, setTotalElements] = useState(0);
+    const PAGE_SIZE = 9;
+
+
     const fetchProductsData = useCallback(async (termToSearch = '', page = 0) => {
         try {
             setLoading(true);
             setErrorPage(null);
-            // Ahora getAllProducts devuelve el objeto Page completo
+
             const pageData = await getAllProducts(termToSearch, page, PAGE_SIZE);
-            setProducts(pageData.content); // Los productos están en 'content'
+            setProducts(pageData.content);
             setTotalPages(pageData.totalPages);
-            setCurrentPage(pageData.number); // La API devuelve la página actual (number)
+            setCurrentPage(pageData.number);
             setTotalElements(pageData.totalElements);
 
             if (termToSearch && pageData.content.length > 0) {
-                // toast.info(...);
+
             } else if (termToSearch && pageData.content.length === 0) {
                 toast.warn(`No se encontraron productos para "${termToSearch}".`);
             }
@@ -96,14 +96,14 @@ const ProductListPage = () => {
         } finally {
             setLoading(false);
         }
-    }, []); // useCallback no tiene dependencias aquí porque searchTerm y page se pasan como args
+    }, []);
 
-    // Efecto para la carga inicial y cuando cambie la página actual o el término de búsqueda forzado
+
     useEffect(() => {
         fetchProductsData(searchTerm, currentPage);
-    }, [currentPage, fetchProductsData]); // Se re-ejecuta si currentPage o la función fetch (memoizada) cambia
-                                        // OJO: si searchTerm cambiara aquí directamente, causaría re-fetch.
-                                        // Lo manejamos con handleSearchSubmit para que el fetch sea explícito en la búsqueda.
+    }, [currentPage, fetchProductsData]);
+
+
 
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
@@ -126,8 +126,8 @@ const ProductListPage = () => {
             try {
                 await deleteProduct(productToDelete.id);
                 toast.success(`¡Producto "${productToDelete.name}" eliminado con éxito!`);
-                // Volver a cargar los productos de la página actual para reflejar la eliminación
-                // Si estamos en la última página y se borra el último ítem, podríamos necesitar ajustar currentPage
+
+
                 fetchProductsData(searchTerm, currentPage); 
             } catch (err) {
                 toast.error(`Error al eliminar el producto: ${err.message}`);
@@ -141,12 +141,12 @@ const ProductListPage = () => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        setCurrentPage(0); // Resetear a la primera página al hacer una nueva búsqueda
+        setCurrentPage(0);
         fetchProductsData(searchTerm, 0); 
     };
 
     const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber); // Esto disparará el useEffect para cargar la nueva página
+        setCurrentPage(pageNumber);
     };
 
     let content;
@@ -202,7 +202,7 @@ const ProductListPage = () => {
             <ConfirmModal
                 isOpen={isConfirmModalOpen}
                 title="Confirmar Eliminación"
-                // ... (resto de las props del modal sin cambios) ...
+
                 message={`¿Estás seguro de que quieres eliminar el producto "${productToDelete?.name}"? Esta acción no se puede deshacer.`}
                 onConfirm={handleConfirmDelete}
                 onCancel={handleCancelDelete}

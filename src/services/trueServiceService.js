@@ -1,6 +1,6 @@
-// Ruta: src/services/trueServiceService.js
 
-const RENDER_BACKEND_URL = process.env.VITE_API_BASE_URL; // ej: https://tu-backend.onrender.com
+
+const RENDER_BACKEND_URL = process.env.VITE_API_BASE_URL;
 const API_BASE_URL = RENDER_BACKEND_URL || 'http://localhost:8080/api/v1'; 
  
 
@@ -8,9 +8,9 @@ const getAuthToken = () => {
     return localStorage.getItem('authToken');
 };
 
-// Helper para construir headers
-// isFormData = true si el body es FormData (el navegador pone el Content-Type)
-// isFormData = false si el body es JSON (necesitamos Content-Type: application/json)
+
+
+
 const buildAuthHeaders = (isFormData = false) => {
     const headers = {};
     const token = getAuthToken();
@@ -70,7 +70,7 @@ export const createService = async (formData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/services`, {
             method: 'POST',
-            headers: buildAuthHeaders(true), // true para FormData
+            headers: buildAuthHeaders(true),
             body: formData 
         });
         if (!response.ok) {
@@ -95,7 +95,7 @@ export const updateService = async (id, formData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/services/${id}`, {
             method: 'PUT',
-            headers: buildAuthHeaders(true), // true para FormData
+            headers: buildAuthHeaders(true),
             body: formData
         });
         if (!response.ok) {
@@ -115,7 +115,7 @@ export const deleteService = async (id) => {
     try {
         const response = await fetch(`${API_BASE_URL}/services/${id}`, {
             method: 'DELETE',
-            headers: buildAuthHeaders(true) // Solo Auth header
+            headers: buildAuthHeaders(true)
         });
         if (!response.ok) { 
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} eliminando servicio`);

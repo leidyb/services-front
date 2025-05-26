@@ -1,13 +1,13 @@
-// Ruta: src/pages/ServiceListPage.jsx
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { getAllServices, deleteService } from '../services/trueServiceService';
 import ServiceCard from '../components/service/ServiceCard';
 import ConfirmModal from '../components/common/ConfirmModal';
 import { toast } from 'react-toastify';
 import { useAuth } from '../contexts/AuthContext';
-import './ProductListPage.css'; // Reutilizando estilos, puedes crear ServiceListPage.css si prefieres
+import './ProductListPage.css';
 
-// Componente de Controles de Paginación
+
 const PaginationControls = ({ currentPage, totalPages, onPageChange, isDisabled }) => {
     const pageNumbers = [];
     if (totalPages <= 7) {
@@ -84,7 +84,7 @@ const ServiceListPage = () => {
 
     useEffect(() => {
         fetchServicesData(searchTerm, currentPage);
-    }, [currentPage, fetchServicesData]); // searchTerm se maneja explícitamente en handleSearchSubmit
+    }, [currentPage, fetchServicesData]);
 
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [serviceToDelete, setServiceToDelete] = useState(null);

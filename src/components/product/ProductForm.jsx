@@ -1,5 +1,5 @@
-// Ruta: src/components/product/ProductForm.jsx
-import React, { useState, useEffect, useMemo } from 'react'; // Añadimos useMemo
+
+import React, { useState, useEffect, useMemo } from 'react';
 import { getAllCategories } from '../../services/categoryService';
 import './ProductForm.css';
 
@@ -11,17 +11,17 @@ const EMPTY_FORM_STATE = {
     price: '',
     stock: '',
     categoryName: '',
-    imagenes: '', // Esto será la URL de la imagen existente o una cadena vacía
+    imagenes: '',
     estado: ESTADOS_PRODUCTO[0]
 };
 
 const ProductForm = ({
     onSubmit,
-    initialData, // Puede ser undefined (creación) o un objeto (edición)
+    initialData,
     isSubmitting = false,
     submitButtonText = "Guardar Producto"
 }) => {
-    // Inicializamos productData una vez basado en initialData o el estado vacío
+
     const [productData, setProductData] = useState(() => {
         if (initialData && Object.keys(initialData).length > 0) {
             return {
@@ -56,17 +56,17 @@ const ProductForm = ({
             }
         };
         fetchCategories();
-    }, []); // Carga categorías solo una vez
+    }, []);
 
-    // Efecto para actualizar el formulario SOLO si la prop initialData cambia REALMENTE
-    // y es diferente de lo que ya tenemos.
+
+
     useEffect(() => {
         if (initialData && Object.keys(initialData).length > 0) {
-            // Comparamos para evitar actualizaciones innecesarias si initialData es el mismo objeto
-            // o si los valores relevantes no han cambiado. Para una comparación más robusta
-            // se podría serializar o usar una librería de deep-compare.
-            // Por ahora, una simple comparación de 'name' puede ayudar si es el campo clave.
-            // O mejor, actualizamos siempre que initialData cambie su referencia y no sea null/undefined.
+
+
+
+
+
             setProductData({
                 name: initialData.name || '',
                 description: initialData.description || '',
@@ -77,14 +77,14 @@ const ProductForm = ({
                 estado: initialData.estado || ESTADOS_PRODUCTO[0]
             });
             setImagePreview(initialData.imagenes ? `http://localhost:8080${initialData.imagenes}` : '');
-            setImageFile(null); // Siempre resetea el archivo al cambiar initialData
+            setImageFile(null);
         } else if (initialData === null || (initialData && Object.keys(initialData).length === 0) ) {
-            // Si initialData se vuelve null o un objeto vacío (ej. después de un reset desde el padre)
+
             setProductData(EMPTY_FORM_STATE);
             setImagePreview('');
             setImageFile(null);
         }
-        // Si initialData es undefined (modo creación desde el inicio), el useState inicial ya lo manejó.
+
     }, [initialData]);
 
     const handleChange = (e) => {
@@ -111,7 +111,7 @@ const ProductForm = ({
     };
 
     const handleSubmit = (e) => {
-        // ... (la lógica de handleSubmit se mantiene igual que en la respuesta anterior)
+
         e.preventDefault();
         const formData = new FormData();
         const productJsonData = {

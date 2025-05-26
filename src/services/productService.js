@@ -1,6 +1,6 @@
-// Ruta: src/services/productService.js
 
-const RENDER_BACKEND_URL = process.env.VITE_API_BASE_URL; // ej: https://tu-backend.onrender.com
+
+const RENDER_BACKEND_URL = process.env.VITE_API_BASE_URL;
 const API_BASE_URL = RENDER_BACKEND_URL || 'http://localhost:8080/api/v1'; 
 
 
@@ -8,7 +8,7 @@ const getAuthToken = () => {
     return localStorage.getItem('authToken');
 };
 
-// Helper para construir headers para peticiones JSON
+
 const buildAuthHeadersForJson = () => {
     const headers = {
         'Content-Type': 'application/json',
@@ -20,16 +20,16 @@ const buildAuthHeadersForJson = () => {
     return headers;
 };
 
-// Helper para construir headers para peticiones FormData (sin Content-Type explícito)
-// El navegador setea el Content-Type automáticamente para FormData, incluyendo el boundary.
+
+
 const buildAuthHeadersForFormData = () => {
     const headers = {};
     const token = localStorage.getItem('authToken');
-    console.log("Token recuperado de localStorage para FormData:", token); // LOG 1
+    console.log("Token recuperado de localStorage para FormData:", token);
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }
-    console.log("Headers construidos para FormData:", headers); // LOG 2
+    console.log("Headers construidos para FormData:", headers);
     return headers;
 };
 
@@ -43,7 +43,7 @@ export const getAllProducts = async (searchTerm = '', page = 0, size = 9) => {
         params.append('size', size);
 
         const url = `${API_BASE_URL}/products?${params.toString()}`;
-        const response = await fetch(url); // GET público
+        const response = await fetch(url);
 
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status}`);
@@ -58,7 +58,7 @@ export const getAllProducts = async (searchTerm = '', page = 0, size = 9) => {
 
 export const getProductById = async (id) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/products/${id}`); // GET público
+        const response = await fetch(`${API_BASE_URL}/products/${id}`);
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status}`);
             throw new Error(errorText || `Error HTTP: ${response.status}`);
@@ -83,27 +83,27 @@ export const createProduct = async (formData) => {
             body: formData
         });
 
-        if (!response.ok) { // Si el status no es 2xx (ej. 400, 404, 500)
+        if (!response.ok) {
             const errorBody = await response.json().catch(() => {
-                // Si el cuerpo del error no es JSON (ej. HTML de error 500 genérico),
-                // o si response.text() sería mejor aquí para capturar HTML
+
+
                 return { message: `Error HTTP ${response.status}: ${response.statusText || 'Error del servidor al procesar la petición.'}` };
             });
 
             const error = new Error(errorBody.message || errorBody.error || JSON.stringify(errorBody.errors) || `Error HTTP: ${response.status}`);
-            error.status = response.status; // ¡MUY IMPORTANTE AÑADIR EL STATUS AL ERROR!
+            error.status = response.status;
             throw error;
         }
-        return await response.json(); // Para respuestas 2xx
+        return await response.json();
     } catch (error) {
-        // Si es un error de red (Failed to fetch), error.status no existirá.
+
         console.error("Error al crear el producto (servicio):", error);
-        // Aseguramos que el error relanzado tenga un mensaje.
-        // Si ya tiene status, lo mantenemos.
-        if (!error.status && !(error instanceof TypeError)) { // TypeError es por red usualmente
-            // Podría ser un error de parseo de JSON de una respuesta OK, aunque es raro.
+
+
+        if (!error.status && !(error instanceof TypeError)) {
+
         }
-        throw error; // Relanzar para que la página lo maneje
+        throw error;
     }
 };
 /**
@@ -116,8 +116,8 @@ export const updateProduct = async (id, formData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/products/${id}`, {
             method: 'PUT',
-            headers: buildAuthHeadersForFormData(), // Headers para FormData
-            body: formData // Enviamos el objeto FormData directamente
+            headers: buildAuthHeadersForFormData(),
+            body: formData
         });
         if (!response.ok) {
             const errorBody = await response.json().catch(() => ({ message: `Error HTTP ${response.status} actualizando producto` }));
@@ -134,7 +134,7 @@ export const deleteProduct = async (id) => {
     try {
         const response = await fetch(`${API_BASE_URL}/products/${id}`, {
             method: 'DELETE',
-            headers: buildAuthHeadersForFormData() // Solo necesita Authorization
+            headers: buildAuthHeadersForFormData()
         });
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} eliminando producto`);

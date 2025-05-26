@@ -1,12 +1,12 @@
-// Ruta: src/components/rating/RatingDisplay.jsx
+
 import React from 'react';
-import './RatingDisplay.css'; // Crearemos este archivo
+import './RatingDisplay.css';
 
 const RatingDisplay = ({ rating }) => {
     const renderStars = (score) => {
         let stars = '';
         for (let i = 0; i < 5; i++) {
-            stars += (i < score ? '\u2605' : '\u2606'); // Estrella llena o vacía
+            stars += (i < score ? '\u2605' : '\u2606');
         }
         return stars;
     };

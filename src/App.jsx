@@ -1,27 +1,27 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/common/Navbar';
-import ProtectedRoute from './components/common/ProtectedRoute'; // Para proteger rutas
+import ProtectedRoute from './components/common/ProtectedRoute';
 
-// Importaciones de Páginas de Productos
+
 import ProductListPage from './pages/ProductListPage';
 import CreateProductPage from './pages/CreateProductPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import EditProductPage from './pages/EditProductPage';
 
-// Importaciones de Páginas de Servicios (¡Asegúrate de que estas existan y estén importadas!)
+
 import ServiceListPage from './pages/ServiceListPage';
 import CreateServicePage from './pages/CreateServicePage';
-import ServiceDetailPage from './pages/ServiceDetailPage';   // <-- IMPORTANTE PARA ESTE ERROR
-import EditServicePage from './pages/EditServicePage';     // <-- IMPORTANTE PARA ESTE ERROR
+import ServiceDetailPage from './pages/ServiceDetailPage';
+import EditServicePage from './pages/EditServicePage';
 
-// Importaciones de Páginas de Autenticación y Admin
+
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import UserManagementPage from './pages/UserManagementPage';
 import CategoryManagementPage from './pages/CategoryManagementPage';
 
-// Toastify (ya lo tenías)
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -63,7 +63,7 @@ function App() {
       </main>
       <ToastContainer
         position="top-right"
-        autoClose={3000} // Reducido un poco el tiempo
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

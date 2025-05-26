@@ -1,11 +1,11 @@
-// Ruta: src/pages/EditServicePage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ServiceForm from '../components/service/ServiceForm';
 import { getServiceById, updateService } from '../services/trueServiceService';
 import { toast } from 'react-toastify';
 import { useAuth } from '../contexts/AuthContext';
-import './CreateProductPage.css'; // Reutilizando estilos
+import './CreateProductPage.css';
 
 const EditServicePage = () => {
     const [service, setService] = useState(null);
@@ -36,7 +36,7 @@ const EditServicePage = () => {
         fetchServiceDetails();
     }, [id, navigate]);
 
-    const handleUpdateService = async (formData) => { // formData viene de ServiceForm
+    const handleUpdateService = async (formData) => {
         setIsSubmitting(true);
         try {
             await updateService(id, formData);

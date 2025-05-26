@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsersAdmin, updateUserRolesAdmin } from '../services/adminService';
-import { toast } from 'react-toastify'; // Importar toast
+import { toast } from 'react-toastify';
 import './UserManagementPage.css'; 
 
 const UserManagementPage = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [errorPage, setErrorPage] = useState(null); // Para errores de carga de página
+    const [errorPage, setErrorPage] = useState(null);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
     const [rolesInput, setRolesInput] = useState('');
-    // const [editError, setEditError] = useState(''); // Ya no se usa
-    // const [editSuccess, setEditSuccess] = useState(''); // Ya no se usa
+
+
     const [isSavingRoles, setIsSavingRoles] = useState(false);
 
 
@@ -60,7 +60,7 @@ const UserManagementPage = () => {
             await updateUserRolesAdmin(editingUser.username, { roles: rolesArray });
             toast.success('¡Roles actualizados con éxito!');
             fetchUsers(); 
-            handleCloseModal(); // Cerramos el modal inmediatamente después del éxito
+            handleCloseModal();
         } catch (err) {
             toast.error(err.message || 'Error al actualizar los roles.');
         } finally {
@@ -69,14 +69,14 @@ const UserManagementPage = () => {
     };
 
     if (loading) return <div>Cargando usuarios...</div>;
-    // Mostrar error de página solo si no hay usuarios (ej. fallo inicial de carga)
+
     if (errorPage && users.length === 0) return <div style={{ color: 'red', padding: '20px' }}>Error: {errorPage}</div>;
 
 
     return (
         <div className="user-management-page">
             <h1>Gestión de Usuarios</h1>
-            {users.length === 0 && !loading && !errorPage ? ( // Ajuste en condición
+            {users.length === 0 && !loading && !errorPage ? (
                 <p>No hay usuarios para mostrar.</p>
             ) : (
                 <table>

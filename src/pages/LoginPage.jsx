@@ -18,8 +18,8 @@ const LoginPage = () => {
         try {
             const responseData = await apiLogin({ username, password });
             contextLogin(responseData); 
-            // El toast de bienvenida ahora se puede poner aquí, ya que el AuthContext ya actualizó el user
-            // const decodedUser = jwtDecode(responseData.accessToken); // Si necesitas el nombre directamente
+
+
             toast.success(`¡Bienvenido de nuevo, ${username}!`); 
             navigate('/'); 
         } catch (err) {

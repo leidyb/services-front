@@ -1,17 +1,17 @@
-// Ruta: src/services/categoryService.js
 
-// Lee la variable de entorno VITE_API_BASE_URL que configurarás en Render.
-// Si no está definida (ej. en desarrollo local), usa http://localhost:8080/api/v1 como fallback.
+
+
+
 const BACKEND_API_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
 
-const API_CATEGORIES_URL = `${BACKEND_API_BASE_URL}/categories`; // Construye la URL completa para categorías
+const API_CATEGORIES_URL = `${BACKEND_API_BASE_URL}/categories`;
 
-// Helper para obtener el token JWT de localStorage
+
 const getAuthToken = () => {
     return localStorage.getItem('authToken');
 };
 
-// Helper para construir los headers de autenticación
+
 const buildAuthHeaders = (isFormData = false) => {
     const headers = {};
     const token = getAuthToken();
@@ -37,7 +37,7 @@ export const getAllCategories = async (tipo) => {
         if (tipo) {
             url += `?tipo=${tipo}`;
         }
-        const response = await fetch(url); // Endpoint público
+        const response = await fetch(url);
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} al obtener categorías`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener categorías`);
@@ -56,7 +56,7 @@ export const getAllCategories = async (tipo) => {
  */
 export const getCategoryById = async (id) => {
     try {
-        const response = await fetch(`${API_CATEGORIES_URL}/${id}`); // Endpoint público
+        const response = await fetch(`${API_CATEGORIES_URL}/${id}`);
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status} al obtener la categoría`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener la categoría`);
@@ -77,7 +77,7 @@ export const createCategory = async (categoryData) => {
     try {
         const response = await fetch(API_CATEGORIES_URL, {
             method: 'POST',
-            headers: buildAuthHeaders(), // Necesita token
+            headers: buildAuthHeaders(),
             body: JSON.stringify(categoryData)
         });
         if (!response.ok) {
@@ -103,7 +103,7 @@ export const updateCategory = async (id, categoryData) => {
     try {
         const response = await fetch(`${API_CATEGORIES_URL}/${id}`, {
             method: 'PUT',
-            headers: buildAuthHeaders(), // Necesita token
+            headers: buildAuthHeaders(),
             body: JSON.stringify(categoryData)
         });
         if (!response.ok) {
@@ -127,7 +127,7 @@ export const updateCategory = async (id, categoryData) => {
 export const deleteCategory = async (id) => {
     try {
         const headers = buildAuthHeaders(true); 
-        delete headers['Content-Type']; // Para DELETE sin cuerpo
+        delete headers['Content-Type'];
 
         const response = await fetch(`${API_CATEGORIES_URL}/${id}`, {
             method: 'DELETE',

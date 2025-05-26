@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext'; // Asumiendo que la ruta es correcta
+import { useAuth } from '../../contexts/AuthContext';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -12,8 +12,8 @@ const Navbar = () => {
         navigate('/login');
     };
 
-    // Verificamos si el usuario es ADMIN
-    // user?.roles se asegura de que no haya error si user o user.roles es null/undefined
+
+
     const isAdmin = isAuthenticated && user?.roles?.includes('ROLE_ADMIN');
 
     return (

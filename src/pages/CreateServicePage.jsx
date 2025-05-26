@@ -1,11 +1,11 @@
-// Ruta: src/pages/CreateServicePage.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ServiceForm from '../components/service/ServiceForm';
 import { createService } from '../services/trueServiceService';
 import { toast } from 'react-toastify';
-import { useAuth } from '../contexts/AuthContext'; // Para verificar si está logueado
-import './CreateProductPage.css'; // Reutilizando estilos
+import { useAuth } from '../contexts/AuthContext';
+import './CreateProductPage.css';
 
 const CreateServicePage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,7 +13,7 @@ const CreateServicePage = () => {
     const [formKey, setFormKey] = useState(Date.now()); 
     const { logout } = useAuth();
 
-    const handleCreateService = async (formData) => { // formData viene de ServiceForm
+    const handleCreateService = async (formData) => {
         setIsSubmitting(true);
         try {
             const newService = await createService(formData); 

@@ -1,18 +1,18 @@
-// Ruta: src/components/rating/RatingForm.jsx
+
 import React, { useState } from 'react';
-import './RatingForm.css'; // Crearemos este archivo para los estilos
+import './RatingForm.css';
 
 const RatingForm = ({ onSubmit, isSubmitting = false, existingRating = null }) => {
-    // Si hay una calificación existente (ej. para editar, aunque no lo implementaremos ahora),
-    // podríamos pre-llenar el formulario. Por ahora, solo para creación.
+
+
     const [score, setScore] = useState(existingRating ? existingRating.score : 0);
-    const [hoverScore, setHoverScore] = useState(0); // Para el efecto hover en las estrellas
+    const [hoverScore, setHoverScore] = useState(0);
     const [comment, setComment] = useState(existingRating ? existingRating.comment : '');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (score === 0) {
-            // Podrías usar toast aquí si lo deseas
+
             alert("Por favor, selecciona una puntuación (estrellas).");
             return;
         }
@@ -26,9 +26,9 @@ const RatingForm = ({ onSubmit, isSubmitting = false, existingRating = null }) =
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 onClick={onClick}
-                role="button" // Para accesibilidad
-                tabIndex={0} // Para que sea enfocable
-                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onClick()} // Para accesibilidad
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onClick()}
             >
                 {marked ? '\u2605' : '\u2606'} {/* Estrella llena vs. vacía */}
             </span>

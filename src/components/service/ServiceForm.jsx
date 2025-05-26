@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAllCategories } from '../../services/categoryService';
-import '../product/ProductForm.css'; // Reutilizamos los estilos de ProductForm
+import '../product/ProductForm.css';
 
-const ESTADOS_SERVICIO = ['ACTIVO', 'INACTIVO', 'PENDIENTE', 'CONTRATADO']; // Ajusta según tu Enum EstadoOferta
+const ESTADOS_SERVICIO = ['ACTIVO', 'INACTIVO', 'PENDIENTE', 'CONTRATADO'];
 
 const getInitialFormState = (initialData = null) => {
     if (initialData && Object.keys(initialData).length > 0) {
@@ -10,7 +10,7 @@ const getInitialFormState = (initialData = null) => {
             name: initialData.name || '',
             description: initialData.description || '',
             estimatedPrice: initialData.estimatedPrice || '',
-            imagenes: initialData.imagenes || '', // URL de la imagen existente si la hay
+            imagenes: initialData.imagenes || '',
             estado: initialData.estado || ESTADOS_SERVICIO[0],
             categoryName: initialData.categoryName || ''
         };
@@ -79,12 +79,12 @@ const ServiceForm = ({
         const serviceJsonData = {
             name: serviceData.name,
             description: serviceData.description,
-            estimatedPrice: parseFloat(serviceData.estimatedPrice) || null, // Permitir null si es a convenir
+            estimatedPrice: parseFloat(serviceData.estimatedPrice) || null,
             estado: serviceData.estado,
             categoryName: serviceData.categoryName,
-            // Si no se sube un nuevo archivo Y estamos editando Y había una imagen antes,
-            // enviamos su nombre de archivo para que el backend sepa que no se cambió/borró.
-            // El backend espera el nombre del archivo, no la URL completa para este campo DTO.
+
+
+
             imagenes: imageFile ? null : (serviceData.imagenes ? serviceData.imagenes.substring(serviceData.imagenes.lastIndexOf('/') + 1) : null)
         };
         formData.append('service', new Blob([JSON.stringify(serviceJsonData)], { type: "application/json" }));

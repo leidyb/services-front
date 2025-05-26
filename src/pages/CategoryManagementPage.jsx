@@ -1,11 +1,11 @@
-// Ruta: src/pages/CategoryManagementPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { getAllCategories, deleteCategory, createCategory, updateCategory } from '../services/categoryService';
 import ConfirmModal from '../components/common/ConfirmModal';
-import CategoryFormModal from '../components/category/CategoryFormModal'; // Este es el modal del formulario
+import CategoryFormModal from '../components/category/CategoryFormModal';
 import { toast } from 'react-toastify';
-import './UserManagementPage.css'; // Reusando estilos por simplicidad (o crea CategoryManagementPage.css)
-import '../components/category/CategoryFormModal.css'; // Estilos para el nuevo modal
+import './UserManagementPage.css';
+import '../components/category/CategoryFormModal.css';
 
 const CategoryManagementPage = () => {
     const [categories, setCategories] = useState([]);
@@ -91,7 +91,7 @@ const CategoryManagementPage = () => {
             fetchCategories(); 
             handleCloseCategoryModal();
         } catch (err) {
-            // El servicio ya debería formatear el error del backend
+
             toast.error(err.message || 'Error al guardar la categoría.');
         } finally {
             setIsSavingCategory(false);
@@ -166,7 +166,7 @@ const CategoryManagementPage = () => {
 
             {isCategoryModalOpen && (
                 <CategoryFormModal
-                    isOpen={isCategoryModalOpen} // Esta prop es para el modal en sí, no necesita ser controlada por el form
+                    isOpen={isCategoryModalOpen}
                     onClose={handleCloseCategoryModal}
                     onSave={handleSaveCategory}
                     categoryData={editingCategory} 

@@ -8,7 +8,7 @@ const CategoryFormModal = ({ isOpen, onClose, onSave, categoryData, isSaving }) 
     const [tipo, setTipo] = useState(CATEGORY_TYPES[0]); 
 
     useEffect(() => {
-        if (isOpen) { // Solo actualizar cuando el modal se abre o categoryData cambia y está abierto
+        if (isOpen) {
             if (categoryData && categoryData.id) { 
                 setNombre(categoryData.nombre || '');
                 setTipo(categoryData.tipo || CATEGORY_TYPES[0]);

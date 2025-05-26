@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import placeholderServiceImage from '../../assets/images/placeholder-service.png'; // Asegúrate que esta imagen exista
-import '../product/ProductCard.css'; // Reutilizando estilos
+import placeholderServiceImage from '../../assets/images/placeholder-service.png';
+import '../product/ProductCard.css';
 
 const ServiceCard = ({ service, onDelete, isDeleting = false }) => {
     const formattedPrice = service.estimatedPrice !== null && service.estimatedPrice !== undefined 

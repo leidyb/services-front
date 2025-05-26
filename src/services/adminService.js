@@ -1,19 +1,19 @@
-// Ruta: src/services/adminService.js
 
-// Lee la variable de entorno VITE_API_BASE_URL que configurarás en Render.
-// Si no está definida (ej. en desarrollo local), usa http://localhost:8080/api/v1 como fallback.
-// Nota: El endpoint de admin es /api/admin, no /api/v1/admin, así que construimos desde la base.
-const BACKEND_BASE_URL = process.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080'; // URL base sin /api/v1
 
-const API_ADMIN_URL = `${BACKEND_BASE_URL}/api/admin`; // Construye la URL completa para admin
 
-// Helper para obtener el token JWT de localStorage
+
+
+const BACKEND_BASE_URL = process.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080';
+
+const API_ADMIN_URL = `${BACKEND_BASE_URL}/api/admin`;
+
+
 const getAuthToken = () => {
     return localStorage.getItem('authToken');
 };
 
-// Helper para construir los headers de autenticación
-// isFormData = false para JSON, true para FormData (no usado aquí por ahora)
+
+
 const buildAuthHeaders = (isFormData = false) => {
     const headers = {};
     const token = getAuthToken();
@@ -34,9 +34,9 @@ const buildAuthHeaders = (isFormData = false) => {
  */
 export const getAllUsersAdmin = async () => {
     try {
-        const response = await fetch(`${API_ADMIN_URL}/users`, { // Llama a /api/admin/users
+        const response = await fetch(`${API_ADMIN_URL}/users`, {
             method: 'GET',
-            headers: buildAuthHeaders(), // Necesita token de ADMIN
+            headers: buildAuthHeaders(),
         });
 
         if (!response.ok) {
@@ -60,13 +60,13 @@ export const getAllUsersAdmin = async () => {
  */
 export const updateUserRolesAdmin = async (username, rolesData) => {
     try {
-        // ##### LÍNEA CORREGIDA #####
-        const url = `${API_ADMIN_URL}/users/${username}/roles`; // Llama a /api/admin/users/{username}/roles
-        // console.log("URL para updateUserRolesAdmin:", url); // Descomentar para depurar
+
+        const url = `${API_ADMIN_URL}/users/${username}/roles`;
+
 
         const response = await fetch(url, {
-            method: 'POST', // O 'PUT' si así lo definiste en el backend, pero POST es común para esta acción
-            headers: buildAuthHeaders(), // Necesita token de ADMIN
+            method: 'POST',
+            headers: buildAuthHeaders(),
             body: JSON.stringify(rolesData),
         });
 

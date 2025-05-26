@@ -1,4 +1,4 @@
-// Ruta: src/components/common/ConfirmModal.jsx
+
 import React from 'react';
 import './ConfirmModal.css';
 
@@ -10,8 +10,8 @@ const ConfirmModal = ({
     onCancel, 
     confirmText = "Confirmar", 
     cancelText = "Cancelar",
-    isConfirmDisabled = false, // Nueva prop
-    isCancelDisabled = false   // Nueva prop
+    isConfirmDisabled = false,
+    isCancelDisabled = false
 }) => {
     if (!isOpen) {
         return null;
@@ -26,14 +26,14 @@ const ConfirmModal = ({
                     <button 
                         onClick={onConfirm} 
                         className="modal-button-confirm confirm"
-                        disabled={isConfirmDisabled} // Aplicar disabled
+                        disabled={isConfirmDisabled}
                     >
                         {confirmText}
                     </button>
                     <button 
                         onClick={onCancel} 
                         className="modal-button-confirm cancel"
-                        disabled={isCancelDisabled} // Aplicar disabled
+                        disabled={isCancelDisabled}
                     >
                         {cancelText}
                     </button>

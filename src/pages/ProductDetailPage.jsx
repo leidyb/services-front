@@ -1,14 +1,14 @@
-// Ruta: src/pages/ProductDetailPage.jsx
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProductById, deleteProduct } from '../services/productService';
 import { getRatingsForProduct, createRating, deleteRating as apiDeleteRating } from '../services/ratingService';
-import { getSellerProfile } from '../services/userService'; // <-- NUEVO: Importar servicio de perfil
+import { getSellerProfile } from '../services/userService';
 import { useAuth } from '../contexts/AuthContext';
 import ConfirmModal from '../components/common/ConfirmModal';
 import RatingForm from '../components/rating/RatingForm';
 import RatingDisplay from '../components/rating/RatingDisplay';
-import StarRatingDisplay from '../components/common/StarRatingDisplay'; // <-- NUEVO: Componente de estrellas
+import StarRatingDisplay from '../components/common/StarRatingDisplay';
 import { toast } from 'react-toastify';
 import placeholderImage from '../assets/images/placeholder-product.png';
 import './ProductDetailPage.css';
@@ -18,10 +18,10 @@ const ProductDetailPage = () => {
     const [loadingProduct, setLoadingProduct] = useState(true);
     const [errorProduct, setErrorProduct] = useState(null);
 
-    const [sellerProfile, setSellerProfile] = useState(null); // <-- NUEVO: Estado para perfil del vendedor
+    const [sellerProfile, setSellerProfile] = useState(null);
     const [loadingSeller, setLoadingSeller] = useState(false);
 
-    // ... (estados para ratings, modal de delete producto, modal de delete rating, etc. se mantienen)
+
     const [ratings, setRatings] = useState([]);
     const [loadingRatings, setLoadingRatings] = useState(true);
     const [ratingsPage, setRatingsPage] = useState(0);
@@ -45,23 +45,23 @@ const ProductDetailPage = () => {
         return estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
     };
 
-    // Cargar producto y luego perfil del vendedor
+
     useEffect(() => {
         const fetchProduct = async () => {
             if (!productId) { setErrorProduct('ID de producto no válido.'); setLoadingProduct(false); return; }
             setLoadingProduct(true);
-            setLoadingSeller(true); // Iniciar carga de vendedor también
+            setLoadingSeller(true);
             try {
                 const productData = await getProductById(productId);
                 setProduct(productData);
-                // Una vez que tenemos el producto, obtenemos el perfil del vendedor
+
                 if (productData && productData.ofertadoPorUsername) {
                     try {
                         const profileData = await getSellerProfile(productData.ofertadoPorUsername);
                         setSellerProfile(profileData);
                     } catch (profileError) {
                         console.error("Error al cargar perfil del vendedor:", profileError);
-                        // No es un error crítico para la página del producto, solo no mostramos el rating
+
                         setSellerProfile(null);
                     }
                 }
@@ -94,7 +94,7 @@ const ProductDetailPage = () => {
         fetchRatings(ratingsPage);
     }, [productId, ratingsPage, fetchRatings]);
 
-    // ... (requestDeleteProduct, handleConfirmDeleteProduct, handleCancelDeleteProduct se mantienen)
+
     const requestDeleteProduct = () => { if (isDeletingProduct) return; setIsConfirmDeleteProductOpen(true); };
     const handleConfirmDeleteProduct = async () => {
         if (product) {
@@ -121,7 +121,7 @@ const ProductDetailPage = () => {
             setIsSubmittingRating(false);
         }
     };
-    // ... (requestDeleteRating, handleConfirmDeleteRating, handleCancelDeleteRating se mantienen)
+
     const requestDeleteRating = (ratingId) => { setRatingToDeleteId(ratingId); setIsConfirmDeleteRatingOpen(true); };
     const handleConfirmDeleteRating = async () => {
         if (ratingToDeleteId) {
@@ -143,7 +143,7 @@ const ProductDetailPage = () => {
     const canRate = isAuthenticated && product && user?.username !== product.ofertadoPorUsername;
 
     if (loadingProduct) return <div className="page-loading">Cargando detalle del producto...</div>;
-    // ... (manejo de errorProduct y !product se mantienen) ...
+
     if (errorProduct) return <div className="page-error" style={{ color: 'red' }}>Error: {errorProduct} <Link to="/">Volver al catálogo</Link></div>;
     if (!product) return <div className="page-info">Producto no encontrado. <Link to="/">Volver al catálogo</Link></div>;
 
@@ -172,7 +172,7 @@ const ProductDetailPage = () => {
                         <StarRatingDisplay
                             rating={sellerProfile.overallAverageRating}
                             totalRatings={sellerProfile.totalOverallRatings}
-                            size="1em" // Un poco más pequeño para aquí
+                            size="1em"
                         />
                     )}
                     {!loadingSeller && sellerProfile && sellerProfile.totalOverallRatings === 0 && (

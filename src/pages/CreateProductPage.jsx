@@ -1,10 +1,10 @@
-// Ruta: src/pages/CreateProductPage.jsx
-import React, { useState } from 'react'; // Removí useRef si no lo usas para resetear
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductForm from '../components/product/ProductForm';
 import { createProduct } from '../services/productService';
 import { toast } from 'react-toastify';
-import { useAuth } from '../contexts/AuthContext'; // <-- 1. IMPORTAR useAuth
+import { useAuth } from '../contexts/AuthContext';
 import './CreateProductPage.css'; 
 
 const CreateProductPage = () => {
@@ -24,10 +24,10 @@ const CreateProductPage = () => {
             }, 2000);
         } catch (err) {
             toast.error(`Error al crear el producto: ${err.message}`);
-            // 3. VERIFICAR EL ESTADO DEL ERROR Y LLAMAR A logout SI ES 401 O 403
+
             if (err && (err.status === 401 || err.status === 403)) {
                 toast.info("Tu sesión ha expirado o no tienes permisos. Por favor, inicia sesión de nuevo.");
-                logout(); // <--- AHORA logout ESTÁ DEFINIDO
+                logout();
                 navigate('/login');
             }
         } finally {

@@ -1,18 +1,18 @@
-// Ruta: src/services/serviceService.js
 
-// Asegúrate de que la URL base sea la correcta para tu backend
-const RENDER_BACKEND_URL = process.env.VITE_API_BASE_URL; // ej: https://tu-backend.onrender.com
+
+
+const RENDER_BACKEND_URL = process.env.VITE_API_BASE_URL;
 const API_BASE_URL = RENDER_BACKEND_URL || 'http://localhost:8080/api/v1'; 
  
 
-// Helper para obtener el token JWT de localStorage
-// Podrías mover esta función y buildAuthHeaders a un archivo utils/apiHelper.js si se repite mucho
+
+
 const getAuthToken = () => {
     return localStorage.getItem('authToken');
 };
 
-// Helper para construir los headers de autenticación
-// El parámetro isFormData indica si debemos omitir el 'Content-Type' (el navegador lo pone para FormData)
+
+
 const buildAuthHeaders = (isFormData = false) => {
     const headers = {};
     const token = getAuthToken();
@@ -24,7 +24,7 @@ const buildAuthHeaders = (isFormData = false) => {
     if (!isFormData) {
         headers['Content-Type'] = 'application/json';
     }
-    // Para FormData, el navegador establece Content-Type automáticamente con el boundary correcto.
+
     return headers;
 };
 
@@ -45,7 +45,7 @@ export const getAllServices = async (searchTerm = '', page = 0, size = 9) => {
         params.append('size', size);
 
         const url = `${API_BASE_URL}/services?${params.toString()}`;
-        // Asumimos que GET /services es público según la configuración de SecurityConfig
+
         const response = await fetch(url); 
         
         if (!response.ok) {
@@ -66,7 +66,7 @@ export const getAllServices = async (searchTerm = '', page = 0, size = 9) => {
  */
 export const getServiceById = async (id) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/services/${id}`); // Asumimos GET público
+        const response = await fetch(`${API_BASE_URL}/services/${id}`);
         if (!response.ok) {
             const errorText = await response.text().catch(() => `Error HTTP ${response.status}`);
             throw new Error(errorText || `Error HTTP: ${response.status} al obtener el servicio`);
@@ -86,13 +86,13 @@ export const getServiceById = async (id) => {
  * @returns {Promise<object>} El servicio creado.
  */
 export const createService = async (serviceData) => {
-    // Si serviceData es un objeto FormData (porque incluye un archivo de imagen):
-    // const isFormData = serviceData instanceof FormData;
-    // const headers = buildAuthHeaders(isFormData);
-    // const body = isFormData ? serviceData : JSON.stringify(serviceData);
-    // const fetchOptions = { method: 'POST', headers, body };
 
-    // Asumimos JSON por ahora
+
+
+
+
+
+
     const isFormData = false; 
     const headers = buildAuthHeaders(isFormData);
     const body = JSON.stringify(serviceData);
@@ -122,7 +122,7 @@ export const createService = async (serviceData) => {
  * @returns {Promise<object>} El servicio actualizado.
  */
 export const updateService = async (id, serviceData) => {
-    // Asumimos JSON por ahora
+
     const isFormData = false;
     const headers = buildAuthHeaders(isFormData);
     const body = JSON.stringify(serviceData);
@@ -150,9 +150,9 @@ export const updateService = async (id, serviceData) => {
  */
 export const deleteService = async (id) => {
     try {
-        // Para DELETE, no enviamos Content-Type si no hay body.
-        const headers = buildAuthHeaders(true); // Pasamos true para que NO ponga Content-Type JSON
-        delete headers['Content-Type']; // O nos aseguramos que se quite si buildAuthHeaders lo añade por defecto
+
+        const headers = buildAuthHeaders(true);
+        delete headers['Content-Type'];
 
         const response = await fetch(`${API_BASE_URL}/services/${id}`, {
             method: 'DELETE',

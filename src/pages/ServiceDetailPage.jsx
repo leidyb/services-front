@@ -1,26 +1,26 @@
-// Ruta: src/pages/ServiceDetailPage.jsx
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getServiceById, deleteService } from '../services/trueServiceService';
 import { getRatingsForService, createRating, deleteRating as apiDeleteRating } from '../services/ratingService';
-import { getSellerProfile } from '../services/userService'; // <-- IMPORTAR SERVICIO DE PERFIL
+import { getSellerProfile } from '../services/userService';
 import { useAuth } from '../contexts/AuthContext';
 import ConfirmModal from '../components/common/ConfirmModal';
 import RatingForm from '../components/rating/RatingForm';
 import RatingDisplay from '../components/rating/RatingDisplay';
-import StarRatingDisplay from '../components/common/StarRatingDisplay'; // <-- IMPORTAR COMPONENTE DE ESTRELLAS
+import StarRatingDisplay from '../components/common/StarRatingDisplay';
 import { toast } from 'react-toastify';
 import placeholderServiceImage from '../assets/images/placeholder-service.png';
-import './ProductDetailPage.css'; // Reutilizando estilos
+import './ProductDetailPage.css';
 
 const ServiceDetailPage = () => {
     const [service, setService] = useState(null);
     const [loadingService, setLoadingService] = useState(true);
     const [errorService, setErrorService] = useState(null);
 
-    // --- NUEVOS ESTADOS PARA PERFIL DEL VENDEDOR ---
+
     const [sellerProfile, setSellerProfile] = useState(null);
-    const [loadingSeller, setLoadingSeller] = useState(false); // Inicia en false, se activa con el servicio
+    const [loadingSeller, setLoadingSeller] = useState(false);
 
     const [ratings, setRatings] = useState([]);
     const [loadingRatings, setLoadingRatings] = useState(true);
@@ -45,7 +45,7 @@ const ServiceDetailPage = () => {
         return estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
     };
     
-    // Efecto para cargar detalles del servicio y luego el perfil del vendedor
+
     useEffect(() => {
         const fetchServiceAndSeller = async () => {
             if (!serviceId) { 
@@ -54,11 +54,11 @@ const ServiceDetailPage = () => {
                 return; 
             }
             setLoadingService(true);
-            setLoadingSeller(true); // Iniciar carga del vendedor
+            setLoadingSeller(true);
             try {
                 const serviceData = await getServiceById(serviceId);
                 setService(serviceData);
-                // Una vez que tenemos el servicio, obtenemos el perfil del vendedor
+
                 if (serviceData && serviceData.ofertadoPorUsername) {
                     try {
                         const profileData = await getSellerProfile(serviceData.ofertadoPorUsername);
@@ -68,7 +68,7 @@ const ServiceDetailPage = () => {
                         setSellerProfile(null); 
                     }
                 } else {
-                    setSellerProfile(null); // No hay ofertante
+                    setSellerProfile(null);
                 }
             } catch (err) { 
                 setErrorService('No se pudo cargar el servicio.'); 
@@ -82,9 +82,9 @@ const ServiceDetailPage = () => {
         fetchServiceAndSeller();
     }, [serviceId]);
 
-    // ... (fetchServiceRatings, requestDeleteService, handleConfirmDeleteService, handleCancelDeleteService se mantienen igual) ...
-    // ... (handleRatingSubmit, requestDeleteRating, handleConfirmDeleteRating, handleCancelDeleteRating se mantienen igual) ...
-    // ... (logoutAndRedirect, canEditOrDeleteService, canRateService se mantienen igual) ...
+
+
+
     
     const fetchServiceRatings = useCallback(async (page = 0) => { /* ... sin cambios ... */ }, [serviceId]);
     useEffect(() => { if(serviceId) fetchServiceRatings(ratingsPage); }, [serviceId, ratingsPage, fetchServiceRatings]);
