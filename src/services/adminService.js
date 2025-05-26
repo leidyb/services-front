@@ -3,7 +3,7 @@
 // Lee la variable de entorno VITE_API_BASE_URL que configurarás en Render.
 // Si no está definida (ej. en desarrollo local), usa http://localhost:8080/api/v1 como fallback.
 // Nota: El endpoint de admin es /api/admin, no /api/v1/admin, así que construimos desde la base.
-const BACKEND_BASE_URL = import.meta.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080'; // URL base sin /api/v1
+const BACKEND_BASE_URL = process.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080'; // URL base sin /api/v1
 
 const API_ADMIN_URL = `${BACKEND_BASE_URL}/api/admin`; // Construye la URL completa para admin
 

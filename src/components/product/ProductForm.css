@@ -21,6 +21,7 @@
 .form-group input[type="url"],
 .form-group input[type="email"], /* Añade otros tipos de input si los usas */
 .form-group input[type="password"],
+.form-group input[type="tel"],
 .form-group select {
     width: 100%;
     padding: 10px;

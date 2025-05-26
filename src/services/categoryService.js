@@ -2,7 +2,7 @@
 
 // Lee la variable de entorno VITE_API_BASE_URL que configurarás en Render.
 // Si no está definida (ej. en desarrollo local), usa http://localhost:8080/api/v1 como fallback.
-const BACKEND_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
+const BACKEND_API_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
 
 const API_CATEGORIES_URL = `${BACKEND_API_BASE_URL}/categories`; // Construye la URL completa para categorías
 

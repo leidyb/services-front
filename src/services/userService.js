@@ -3,7 +3,7 @@
 // Lee la variable de entorno VITE_API_BASE_URL_ROOT que configurarás en Render
 // o usa http://localhost:8080 como fallback para desarrollo local.
 // Esta debe apuntar a la raíz de tu backend, ej: http://localhost:8080 o https://tu-api.onrender.com
-const BACKEND_API_ROOT_URL = import.meta.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080';
+const BACKEND_API_ROOT_URL = process.env.VITE_API_BASE_URL_ROOT || 'http://localhost:8080';
 
 // Construye la URL completa para los endpoints de usuarios públicos (perfiles)
 const API_USERS_URL = `${BACKEND_API_ROOT_URL}/api/v1/users`; 
